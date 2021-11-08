@@ -1,6 +1,13 @@
 package myapp
 
-import "testing"
+import (
+	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestIndex(t *testing.T) {
 	assert := assert.New(t)
