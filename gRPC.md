@@ -9,7 +9,7 @@ gRPC를 사용하면 서비스를 .proto' 파일에 한 번 정의하고 gRPC가
 
 
 
-
+<!-- 
 ### Defining the service
 
 To define a service, you specify a named service in your `.proto` file:
@@ -21,4 +21,4 @@ service RouteGuide {
 ```
 
 
-
+ -->
