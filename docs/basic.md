@@ -552,6 +552,10 @@ func main() {
 
 ## 6. Arrays 
 
+미리 말하자면 Go에서는 Arrays를 잘 사용하지 않음.
+
+ㅎㅎㅎ위의 말이 의아하겠지만 **Arrays** 말고 **Slices** 사용을 Go에서도 권장함!
+
 배열은 지정된 형식의 메모리를 만들 때 유용하며 할당을 피하는 데 도움이 될 수 있지만, 주로 Slices(아래 8번째 섹션)을 구성하는 Block으로 사용 됨. 
 
 
@@ -594,9 +598,69 @@ Go에서는 Array를 특정 경우(변환 행렬과 같이 규격이 필요한 �
 
 슬라이스는 기본 배열에 대한 참조값을 보관.
 
-한 슬라이스를 다른 슬라이스에 할당하는 경우 둘 다 동일한 배열을 나타냅니다.
+한 슬라이스를 다른 슬라이스에 할당하는 경우 둘 다 동일한 배열을 나타낸다.
 
- 함수에서 슬라이스 인수를 사용하는 경우 슬라이스 요소에 대한 변경 내용이 호출자에게 표시되며, 이는 기본 배열에 포인터를 전달하는 것과 유사합니다. 따라서 읽기 함수는 포인터와 카운트가 아닌 슬라이스 인수를 사용할 수 있습니다. 슬라이스 내의 길이는 읽을 데이터 양의 상한을 설정합니다. 다음은 패키지 OS에서 파일 형식의 읽기 메서드의 서명입니다.
+
+
+#### make로 Slices 만들기
+
+``` go
+b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+
+b = b[:cap(b)] // len(b)=5, cap(b)=5
+b = b[1:] // len(b)=4, cap(b)=4
+```
+
+
+
+#### func append(s []T, vs ...T) []T
+
+``` go
+s = append(s, 3, 12)
+s1 = append(s1, s2...)
+```
+
+
+
+#### len(slices) & cap(slices)
+
+`len(s)` : slices 의 길이
+
+`cap(s)` : slices 의 용량
+
+용량은 아래에서 자세히 확인!
+
+
+
+#### Slices의 내부 구조
+
+배열의 첫 번째 요소를 가리키는 포인터 + slice의 길이 + slice의 용량
+
+<img src="https://media.vlpt.us/post-images/kimmachinegun/57629370-cbb4-11e8-a4ed-41eb39296329/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EC%8B%B11.png" alt="img" style="zoom:48%;" />
+
+
+
+``` go 
+s := make([]int, 0, 3)
+for i := 0; i < 5; i++ {
+    s = append(s, i)
+    fmt.Printf("cap %v, len %v, %p\n", cap(s), len(s), s)
+}
+
+/* result
+cap 3, len 1, 0x1040e130
+cap 3, len 2, 0x1040e130
+cap 3, len 3, 0x1040e130
+cap 6, len 4, 0x10432220
+cap 6, len 5, 0x10432220
+*/
+```
+
+
+
+#### Two-dimensional slices
+
+
 
 
 
