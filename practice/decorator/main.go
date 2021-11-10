@@ -1,55 +1,103 @@
 package main
 
 import (
-	"log"
-	"net/http"
-	"time"
+	"fmt"
 
-	"github.com/gngsn/learning-go/practice/decorator/app"
-	"github.com/gngsn/learning-go/practice/decorator/handler"
+	"github.com/gngsn/learning-go/practice/decorator/cipher"
+	"github.com/gngsn/learning-go/practice/decorator/lzw"
 )
 
-// decorator function
-func logger(w http.ResponseWriter, r *http.Request, h http.Handler) {
-	start := time.Now()
-	log.Println("[LOGGER1] Started")
-	h.ServeHTTP(w, r)
-	log.Println("[LOGGER1] Completed time:", time.Since(start).Milliseconds())
+type Component interface {
+	Operator(string)
 }
 
-func logger2(w http.ResponseWriter, r *http.Request, h http.Handler) {
-	start := time.Now()
-	log.Println("[LOGGER2] Started")
-	h.ServeHTTP(w, r)
-	log.Println("[LOGGER2] Completed time:", time.Since(start).Milliseconds())
+var sentData string
+var recvData string
+
+type SendComponent struct {}
+
+func (self *SendComponent) Operator(data string) {
+	// Send data
+	sentData = data
 }
 
-func NewHandler() http.Handler {
-	h := app.NewHandler()
-	
-	/*
-		decorator로 감싸기
-		
-		DecoratorHandler(DecoratorHandler(mux, logger), logger2)
-		: 여기서 mux는 app.NewHandler()
-		: DecoratorHandler에서 fn(두번째 인자)를 먼저 실행하게 해서 순서는 43~47lines에 해당
-		-> 이렇게 decorator는 암호화 encrypt, 인증, 마케팅 정보 보내는 등으로 확장시킬 수 있음.
-		-> 새로운 코드를 한 곳에서 결합시켜주기만 하면 됨.
-	*/
-	h = handler.NewDecoratorHandler(h, logger)
-	h = handler.NewDecoratorHandler(h, logger2)
-	return h
+type ZipComponent struct {
+	com Component
 }
 
-/*
-	2021/11/10 18:50:01 [LOGGER2] Started
-	2021/11/10 18:50:01 [LOGGER1] Started
-	2021/11/10 18:50:01 [LOGGER1] Completed time: 0
-	2021/11/10 18:50:01 [LOGGER2] Completed time: 0
-*/
+func (self *ZipComponent) Operator(data string) {
+	zipData, err := lzw.Write([]byte(data))
+	if err != nil {
+		panic(err)
+	}
+	self.com.Operator(string(zipData))
+}
+
+type EncryptComponent struct {
+	key string
+	com Component
+}
+
+func (self *EncryptComponent) Operator(data string) {
+	encryptData, err := cipher.Encrypt([]byte(data), self.key)
+	if err != nil {
+		panic(err)
+	}
+	self.com.Operator(string(encryptData))
+}
+
+type DecryptComponent struct {
+	key string
+	com Component
+}
+
+func (self *DecryptComponent) Operator(data string) {
+	decryptData, err := cipher.Decrypt([]byte(data), self.key)
+	if err != nil {
+		panic(err)
+	}
+	self.com.Operator(string(decryptData))
+}
+
+type UnzipComponent struct {
+	com Component
+}
+
+func (self *UnzipComponent) Operator(data string) {
+	unzipData, err := lzw.Read([]byte(data))
+	if err != nil {
+		panic(err)
+	}
+	self.com.Operator(string(unzipData))
+}
+
+type ReadComponent struct {}
+func (self *ReadComponent) Operator(data string) {
+	recvData = data
+}
+
 
 func main() {
-	mux := NewHandler()
+	// Data -> Encrypt -> Zip -> Send
+	sender := &EncryptComponent{
+		key: "abcde",
+		com: &ZipComponent{ 
+			com: &SendComponent{},
+		},
+	}
 
-	http.ListenAndServe(":3000", mux)
+	sender.Operator("Hello World")
+
+	fmt.Println(sentData)
+
+	// Data <- Decrypt <- UnZip <- Receive
+	receiver := &UnzipComponent{
+		com: &DecryptComponent{
+			key: "abcde",
+			com: &ReadComponent{},
+		},
+	}
+
+	receiver.Operator(sentData)
+	fmt.Println(recvData)
 }
