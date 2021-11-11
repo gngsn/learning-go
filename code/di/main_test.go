@@ -1,4 +1,4 @@
-package di
+package main
 
 import (
 	"bytes"
@@ -21,6 +21,6 @@ func TestGreet(t *testing.T) {
     }
 }
 
-func TestMain(t *testing.T) {
-    main()
-}
+// func TestMain(t *testing.T) {
+//     main()
+// }
