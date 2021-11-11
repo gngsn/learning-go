@@ -18,9 +18,10 @@ test : goconvey, benchmark
 <li> 2. arrays & slices </li>
 <li> 4. interface </li>
 <li> 5. maps </li>
-<li> 6. stringer (String() Method) </li>
-<li> 7. benchmark (tester) </li>
-<li> 8. restAPI </li>
+<li> 6. defer + panic + recover </li>
+<li> 7. stringer (String() Method) </li>
+<li> 8. benchmark (tester) </li>
+<li> 9. restAPI </li>
 </ul>
 
 ### code
@@ -31,8 +32,11 @@ test : goconvey, benchmark
 <li> 3. slices </li>
 <li> 4. structs (interface + methods)</li>
 <li> 5. pointers</li>
-<li> 5. maps</li>
-<li> 6. di</li>
+<li> 6. maps</li>
+<li> 7. di</li>
+<li> 8. mocking (countdown)</li>
+<li> 9. concurrency (goroutine, channel)</li>
+<li> 9. select (multiple channel)</li>
 </ul>
 
 
