@@ -76,7 +76,6 @@ func (self *ReadComponent) Operator(data string) {
 	recvData = data
 }
 
-
 func main() {
 	// Data -> Encrypt -> Zip -> Send
 	sender := &EncryptComponent{

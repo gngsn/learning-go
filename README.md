@@ -13,12 +13,14 @@ test : goconvey, benchmark
 ### docs
 
 <ul>
-<li> 0. Tucker_Go (개념적 내용, 훑어보기)</li>
+<li> 0. tuckerGo (개념적 내용, 훑어보기)</li>
 <li> 1. basic </li>
 <li> 2. arrays & slices </li>
 <li> 4. interface </li>
-<li> 3. benchmark (tester) </li>
-<li> 5. RestAPI </li>
+<li> 5. maps </li>
+<li> 6. stringer (String() Method) </li>
+<li> 7. benchmark (tester) </li>
+<li> 8. restAPI </li>
 </ul>
 
 ### code
@@ -27,6 +29,10 @@ test : goconvey, benchmark
 <li> 1. iteration </li>
 <li> 2. arrays </li>
 <li> 3. slices </li>
+<li> 4. structs (interface + methods)</li>
+<li> 5. pointers</li>
+<li> 5. maps</li>
+<li> 6. di</li>
 </ul>
 
 
