@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gngsn/learning-go/practice/restapi/model"
+	"github.com/gngsn/learning-go/apps/restapi/model"
 	"github.com/stretchr/testify/assert"
 )
 

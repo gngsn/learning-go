@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/gngsn/learning-go/practice/decorator/cipher"
-	"github.com/gngsn/learning-go/practice/decorator/lzw"
+	"github.com/gngsn/learning-go/apps/decorator/cipher"
+	"github.com/gngsn/learning-go/apps/decorator/lzw"
 )
 
 type Component interface {

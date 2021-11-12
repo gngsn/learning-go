@@ -10,21 +10,8 @@ test : goconvey, benchmark
 
 <br />
 
-### docs
 
-<ul>
-<li> 0. tuckerGo (개념적 내용, 훑어보기)</li>
-<li> 1. basic </li>
-<li> 2. arrays & slices </li>
-<li> 4. interface </li>
-<li> 5. maps </li>
-<li> 6. defer + panic + recover </li>
-<li> 7. stringer (String() Method) </li>
-<li> 8. benchmark (tester) </li>
-<li> 9. restAPI </li>
-</ul>
-
-### code
+### code with test
 
 <ul>
 <li> 1. iteration </li>
@@ -39,8 +26,22 @@ test : goconvey, benchmark
 <li> 9. select (multiple channel)</li>
 </ul>
 
+### docs
 
-### practice
+<ul>
+<li> 0. tuckerGo (개념적 내용, 훑어보기)</li>
+<li> 1. basic </li>
+<li> 2. arrays & slices </li>
+<li> 4. interface </li>
+<li> 5. maps </li>
+<li> 6. defer + panic + recover </li>
+<li> 7. stringer (String() Method) </li>
+<li> 8. benchmark (tester) </li>
+<li> 9. restAPI </li>
+</ul>
+
+
+### apps (application)
 
 <ul>
 <li> basic (web handler, json, test ...) </li>

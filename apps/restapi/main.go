@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/gngsn/learning-go/practice/restapi/app"
+	"github.com/gngsn/learning-go/apps/restapi/app"
 )
 
 func main() {

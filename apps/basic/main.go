@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/gngsn/learning-go/practice/basic/myapp"
+	"github.com/gngsn/learning-go/apps/basic/myapp"
 )
 
 

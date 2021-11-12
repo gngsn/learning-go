@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gngsn/learning-go/practice/logging/app"
-	"github.com/gngsn/learning-go/practice/logging/handler"
+	"github.com/gngsn/learning-go/apps/logging/app"
+	"github.com/gngsn/learning-go/apps/logging/handler"
 )
 
 // decorator function
