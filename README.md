@@ -48,6 +48,7 @@ test : goconvey, benchmark
 <li> restapi (rest api + test code) </li>
 <li> decorator (decorator pattern) </li>
 <li> logging (decorator pattern을 사용한 logging) </li>
+<li> postgre (todo app with postgresql) </li>
 </ul>
 </details>
 
