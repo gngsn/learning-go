@@ -6,11 +6,11 @@ import (
 	"os"
 
 	"github.com/gngsn/learning-go/apps/postgre/app"
-)
+) 
 
 func main() {
 	port := os.Getenv("PORT")
-
+	
 	m := app.MakeHandler(os.Getenv("DATABASE_URL"))
 	defer m.Close()
 

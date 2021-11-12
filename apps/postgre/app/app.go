@@ -109,7 +109,7 @@ func MakeHandler(filepath string) *AppHandler {
 	n := negroni.New(
 		negroni.NewRecovery(),
 		negroni.NewLogger(),
-		negroni.HandlerFunc(CheckSignin),
+		// negroni.HandlerFunc(CheckSignin),
 		negroni.NewStatic(http.Dir("public")))
 	n.UseHandler(r)
 
@@ -122,8 +122,8 @@ func MakeHandler(filepath string) *AppHandler {
 	r.HandleFunc("/todos", a.addTodoHandler).Methods("POST")
 	r.HandleFunc("/todos/{id:[0-9]+}", a.removeTodoHandler).Methods("DELETE")
 	r.HandleFunc("/complete-todo/{id:[0-9]+}", a.completeTodoHandler).Methods("GET")
-	r.HandleFunc("/auth/google/login", googleLoginHandler)
-	r.HandleFunc("/auth/google/callback", googleAuthCallback)
+	// r.HandleFunc("/auth/google/login", googleLoginHandler)
+	// r.HandleFunc("/auth/google/callback", googleAuthCallback)
 	r.HandleFunc("/", a.indexHandler)
 
 	return a

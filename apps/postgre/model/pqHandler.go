@@ -76,7 +76,7 @@ func (s *pqHandler) Close() {
 }
 
 func newPQHandler(dbConn string) DBHandler {
-	database, err := sql.Open("postgres", dbConn)
+	database, err := sql.Open("postgres", dbConn + " sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
