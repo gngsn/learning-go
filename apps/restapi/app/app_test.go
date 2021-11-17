@@ -186,7 +186,7 @@ func TestUpdateUser(t *testing.T) {
 	assert.NoError(err)
 	assert.NotEqual(0, user.ID)
 
-	updateStr := fmt.Sprintf(`{"id":%d, "first_name":"jason"}`, user.ID)
+	updateStr := fmt.Sprintf(`{"id":%d, "first_name":"gngsn"}`, user.ID)
 
 	req, _ = http.NewRequest("PUT", ts.URL+"/users",
 		strings.NewReader(updateStr))
@@ -198,7 +198,7 @@ func TestUpdateUser(t *testing.T) {
 	err = json.NewDecoder(resp.Body).Decode(updateUser)
 	assert.NoError(err)
 	assert.Equal(updateUser.ID, user.ID)
-	assert.Equal("jason", updateUser.FirstName)
+	assert.Equal("gngsn", updateUser.FirstName)
 	assert.Equal(user.LastName, updateUser.LastName)
 	assert.Equal(user.Email, updateUser.Email)
 }
