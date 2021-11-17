@@ -2,7 +2,7 @@
 
 이 문서는 [고루틴 강의](https://youtu.be/tRdODUXV3ik) 를 보고 정리한 문서입니다!
 
-
+<br/>
 
 ### Thread
 
@@ -14,7 +14,7 @@ CPU는 명령어 실행 주체
 
 CPU는 IP 포인터가 가르키고 있는 것만 처리하면 됨!
 
-
+<br/>
 
 #### Multi-Thread
 
@@ -22,7 +22,7 @@ CPU는 IP 포인터가 가르키고 있는 것만 처리하면 됨!
 
 -> OS는 단순히 계산. OS가 다 해주는 것.
 
-
+<br/>
 
 Thread 전환에는 성능상의 비용이 발생 -> Context Switching
 
@@ -30,7 +30,7 @@ Core 1개인데 Thread가 3개면 Context Switching이 많이 발생
 
 Core 3개인데 Thread가 3개면 Context Switching이 발생하지 않음
 
-
+<br/>
 
 #### Multi-Thread VS Multi-Process
 
@@ -38,9 +38,7 @@ Core 3개인데 Thread가 3개면 Context Switching이 발생하지 않음
 
 하나의 프로그램이 더 들어온다면 실행 인스턴스가 두 개가 되는 거고 서로 다른 데이터, state를 가진다. -> 이것이 멀티 프로세스.
 
-
-
-
+<br/><br/>
 
 ### Go Routine
 
@@ -50,7 +48,7 @@ Go에서 만든 경량 스레드 (가벼운 스레드).
 
 새로운 고루틴은 아래와 같이 만듦
 
-
+<br/>
 
 ``` go
 // /code/goroutine/goroutine.go
@@ -82,13 +80,13 @@ func main() {
 // 가 1 나 2 다 3 라 마 4 바 5 사
 ```
 
-
+<br/>
 
 `main()`, `PrintHangul()`, `PrintNumbers()` 이라는 세 개의 고루틴이 진행중임
 
 
 
-<img src="/Users/gyeongseon/Library/Application Support/typora-user-images/스크린샷 2021-11-17 오후 6.49.46.png" alt="스크린샷 2021-11-17 오후 6.49.46" style="zoom:33%;" />
+<img src="./image/goroutine1.png" alt="goroutine1" style="zoom:33%;" />
 
 
 
@@ -96,11 +94,11 @@ func main() {
 
 안기다리면 `main()` 이 종료되기 때문에 프로그램이 종료됨
 
-
+<br/>
 
 매번 기다려줘야 하나? NO
 
-
+<br/>
 
 #### 서브 고루틴이 종료될 때까지 대기
 
@@ -112,7 +110,7 @@ wg.Done()
 wg.Wait()
 ```
 
-
+<br/>
 
 ``` go
 // /code/goroutine/wg.go
@@ -143,7 +141,7 @@ func main() {
 }
 ```
 
-
+<br/><br/>
 
 #### 고루틴 동작원리
 
@@ -151,13 +149,15 @@ func main() {
 
 고루틴 != 쓰레드. 고루틴이 쓰레드를 이용함.
 
+<br/>
 
+<img src="./image/goroutine2.png" alt="goroutine2" style="zoom:50%;" />
 
-<img src="/Users/gyeongseon/Library/Application Support/typora-user-images/스크린샷 2021-11-17 오후 9.30.22.png" alt="스크린샷 2021-11-17 오후 9.30.22" style="zoom:50%;" />
-
-
+<br/>
 
 코어 2개가 두 개인 머신이 있을 때 아래의 상황을 확인해보자
+
+<br/>
 
 **고루틴 1개일 때,**
 
@@ -165,13 +165,13 @@ Go 프로그램에서 OS 스레드를 만들어서 코어와 매칭하고, 이 �
 
 그리고 고루틴을 만들어서 OS스레드를 통해 코어와 연결되게(실행되게) 만듦.
 
-
+<br/>
 
 **고루틴 2개일 때,**
 
 OS 스레드를 하나 더 만들고 고루틴 하나를 더 만들어서 새로운 OS 스레드 2와 코어 2와 연결하게 만든다. 
 
-
+<br/>
 
 **고루틴 3개일 때,**
 
@@ -179,7 +179,7 @@ OS 스레드를 하나 더 만들고 고루틴 하나를 더 만들어서 새로
 
 그럼 대기하는 고루틴이 많지 않을까? 사실 시스템에서는 시스템콜이 발생하는 경우(파일 읽기/쓰기, 네트워크 읽기/쓰기 등등 대기되는 상태가 많음)가 많고 수시로 교체되는데 우리는 잘 모름. 그 만큼 대기하는 고루틴들이 교체되는 과정도 이와같이 느껴지지 않을 만큼 빠르게 진행이 된다 ~
 
-
+<br/>
 
 **왜 좋을까?**
 
@@ -193,11 +193,7 @@ OS에서 Context Switching이 일어나지 않음. 물론, Goroutine이 교체�
 // https://stonzeteam.github.io/How-Goroutines-Work/
 ```
 
-
-
-
-
-
+<br/><br/>
 
 #### 동시성 프로그래밍의 주의점
 
@@ -243,13 +239,13 @@ func main() {
 }
 ```
 
-
+<br/>
 
 위의 코드를 실행해보면 `panic: Balance should not be negative value: -2000` 와 같은 에러로 `panic` 이 발생함
 
 `account` 의 `Balance` 에 동시에 접근하면서 발생하는 동시성 문제. 
 
-
+<br/>
 
 `account.Balance += 1000` 는 아래와 같은 두 가지 연산임
 
@@ -260,7 +256,7 @@ MOV Balance Rx1
 
 많은 고루틴이 동시에 접근하는 레지스터에 접근할 때 변경되기 전 ADD를 위해 데이터를 가져다 MOV로 대입하는 문제 ~
 
-
+<br/>
 
 ### Mutex (Mutial Exclusion, 상호배제)
 
@@ -268,7 +264,7 @@ Lock을 걸어서 다른 실행 단위가 접근하지 못하는 거임.
 
 칠판에 그림을 그리려고 할 때, 하나의 분필을 먼저 잡은 사람이 그림을 그릴 수 있는 거임.
 
-
+<br/>
 
 ``` go
 package main
@@ -315,7 +311,7 @@ func main() {
 
 `Lock()` 을 얻은 고루틴 하나만 실행하고 `Lock()` 을 반환
 
-
+<br/>
 
 #### Mutex 문제점
 
