@@ -23,7 +23,8 @@ test : goconvey, benchmark
 <li> 7. di</li>
 <li> 8. mocking (countdown)</li>
 <li> 9. concurrency (goroutine, channel)</li>
-<li> 9. select (multiple channel)</li>
+<li> 10. select (multiple channel)</li>
+<li> 11. goroutine [tucker]</li>
 </ul>
 
 ### docs
@@ -36,8 +37,9 @@ test : goconvey, benchmark
 <li> 5. maps </li>
 <li> 6. defer + panic + recover </li>
 <li> 7. stringer (String() Method) </li>
-<li> 8. benchmark (tester) </li>
-<li> 9. restAPI </li>
+<li> 8. goroutine </li>
+<li> 9. benchmark (tester) </li>
+<li> 10. restAPI </li>
 </ul>
 
 

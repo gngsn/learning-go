@@ -1,5 +1,9 @@
 ## Goroutine
 
+이 문서는 [고루틴 강의](https://youtu.be/tRdODUXV3ik) 를 보고 정리한 문서입니다!
+
+
+
 ### Thread
 
 CPU는 명령어 실행 주체
