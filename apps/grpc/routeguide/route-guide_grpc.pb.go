@@ -28,7 +28,7 @@ type RouteGuideClient interface {
 	//Client가 Response 받고 끝내는 게 아니라, Stream을 받으면서 메세지가 더 없을 때까지 계속 구독
 	//- 한번에 큰 데이터를 리턴하게 되면 client는 데이터를 받기 까지 계속 blocking이 되어있어서 다른 작업들을 하지 못하게 됨
 	//
-	//Feat: Rectangle 내에서 사용할 수 있는 기능들 반환 - stream을 반환
+	//Feat: Rectangle 범위 내에 있는 모든 Feature를 stream으로 반환.
 	ListFeatures(ctx context.Context, in *Rectangle, opts ...grpc.CallOption) (RouteGuide_ListFeaturesClient, error)
 	//
 	//Client-side Streaming RPC
@@ -177,7 +177,7 @@ type RouteGuideServer interface {
 	//Client가 Response 받고 끝내는 게 아니라, Stream을 받으면서 메세지가 더 없을 때까지 계속 구독
 	//- 한번에 큰 데이터를 리턴하게 되면 client는 데이터를 받기 까지 계속 blocking이 되어있어서 다른 작업들을 하지 못하게 됨
 	//
-	//Feat: Rectangle 내에서 사용할 수 있는 기능들 반환 - stream을 반환
+	//Feat: Rectangle 범위 내에 있는 모든 Feature를 stream으로 반환.
 	ListFeatures(*Rectangle, RouteGuide_ListFeaturesServer) error
 	//
 	//Client-side Streaming RPC

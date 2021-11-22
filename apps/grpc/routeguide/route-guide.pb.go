@@ -83,7 +83,7 @@ func (x *Point) GetLongitude() int32 {
 //
 //Rectangle : lo, hi
 //
-//각각 사각형의 모퉁이 좌표
+//Rectangle 범위를 가지는 위도, 경도
 type Rectangle struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
