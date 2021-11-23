@@ -348,7 +348,7 @@ $ go run server.go
 
 ## 5. Test Server
 
-https://pkg.go.dev/testing
+<small>🔗 <a href="https://pkg.go.dev/testing">Go Testing</a></small>
 
 음 사실 튜토리얼에서는 `client/client.go` 를 사용했지만, Test 기반 프로젝트를 만들고 싶어서 지금까지 배워온 걸 복습도 해볼겸 테스트 코드를 짰다.
 
@@ -421,7 +421,7 @@ $ go test -run TestGrpc/T1
 
 <br />
 
-####GetFeature
+#### GetFeature
 
 ``` bash
 $ go test -run TestGrpc/T1
@@ -475,4 +475,8 @@ PASS
 ok      github.com/gngsn/learning-go/apps/grpc  0.165s
 ```
 
-<br /><br /><br /><br /><br />
+<br /><br /><br />
+
+재밌다
+
+<br /><br />

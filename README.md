@@ -51,6 +51,7 @@ test : goconvey, benchmark
 <li> decorator (decorator pattern) </li>
 <li> logging (decorator pattern을 사용한 logging) </li>
 <li> postgre (todo app with postgresql) </li>
+<li> grpc </li>
 </ul>
 </details>
 
